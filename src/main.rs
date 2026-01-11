@@ -8,6 +8,7 @@ use axum::{
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::broadcast::{self, Sender};
+use tower_http::cors::{Any, CorsLayer};
 use tracing::{Level, info};
 use tracing_subscriber::FmtSubscriber;
 
@@ -32,9 +33,16 @@ async fn main() {
     let (tx, _) = broadcast::channel(100);
     let state = Arc::new(AppState { tx });
 
+    let cors = CorsLayer::new()
+        .allow_origin(Any) // ← для разработки (разрешает все домены)
+        .allow_methods(Any) // GET, POST, OPTIONS и т.д.
+        .allow_headers(Any) // Content-Type, Authorization и т.д.
+        .allow_credentials(false);
+
     let app = Router::new()
         .route("/send", post(send_message))
         .route("/ws", get(ws_handler))
+        .layer(cors)
         .with_state(state);
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
