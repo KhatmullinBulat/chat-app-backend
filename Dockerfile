@@ -1,5 +1,5 @@
 # Этап сборки
-FROM rust:1.78-slim-bookworm AS builder
+FROM rust:1.92-slim-bookworm AS builder
 WORKDIR /usr/src/app
 
 # Копируем файлы проекта
