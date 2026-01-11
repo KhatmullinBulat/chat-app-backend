@@ -1,0 +1,58 @@
+# Rust
+target/
+**/*.rs.bk
+Cargo.lock          # ← раскомментируй, если библиотека/крейт (не приложение)
+*.pdb               # Windows debug symbols
+
+# Cargo workspaces
+Cargo.toml.orig
+
+# IDE / Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.swn
+*.swo
+*.swn
+.DS_Store
+Thumbs.db
+
+# Logs / temporary files
+*.log
+*.tmp
+*.bak
+*~
+
+# Build artifacts
+dist/
+build/
+out/
+
+# Test coverage
+*.profraw
+*.profdata
+lcov.info
+coverage/
+
+# Optional: если используешь sqlx с оффлайн-компиляцией
+sqlx-data.json
+
+# Docker / контейнеры (если используешь)
+*.dockerignore
+Dockerfile.*
+docker-compose.override.yml
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+
+# Web frontend (если в одном репо случайно остался)
+node_modules/
+frontend/node_modules/
+dist/
+build/
